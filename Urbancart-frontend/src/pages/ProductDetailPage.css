@@ -1,0 +1,124 @@
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: var(--mid);
+  cursor: pointer;
+  margin-bottom: 2.5rem;
+  transition: color 0.15s;
+  padding: 0;
+}
+.back-btn:hover { color: var(--charcoal); }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.detail-img-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--cream);
+}
+.detail-img { width: 100%; height: 100%; object-fit: cover; }
+.detail-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+}
+.detail-discount-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.detail-brand {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.5rem;
+}
+.detail-name {
+  font-family: var(--serif);
+  font-size: 2.75rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.detail-desc {
+  font-size: 0.9rem;
+  color: var(--mid);
+  line-height: 1.85;
+  margin-bottom: 1.75rem;
+}
+.detail-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.detail-price { font-size: 1.75rem; font-weight: 500; }
+.detail-old-price {
+  font-size: 1rem;
+  color: var(--mid);
+  text-decoration: line-through;
+  font-family: var(--sans);
+}
+.detail-ctas { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.detail-ctas .btn { flex: 1; }
+
+.detail-auth-hint {
+  font-size: 0.8rem;
+  color: var(--mid);
+  margin-bottom: 1.5rem;
+}
+.detail-auth-hint a { color: var(--accent); }
+
+.detail-meta {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.detail-meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.detail-meta-row span:first-child { color: var(--mid); }
+.detail-meta-row span:last-child  { font-weight: 500; }
+
+.detail-loading {
+  font-size: 0.875rem;
+  color: var(--mid);
+  padding-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .detail-name { font-size: 2rem; }
+}

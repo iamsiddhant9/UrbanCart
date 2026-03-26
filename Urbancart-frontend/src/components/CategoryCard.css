@@ -1,0 +1,26 @@
+.cat-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.cat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(196, 115, 58, 0.1);
+}
+.cat-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cat-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.cat-name {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--charcoal);
+}

@@ -1,0 +1,37 @@
+.products-page { padding-top: 3rem; }
+
+.products-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.products-main { flex: 1; min-width: 0; }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Skeleton loading */
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.skeleton-card {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 0.75;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@media (max-width: 768px) {
+  .products-layout { flex-direction: column; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+}
