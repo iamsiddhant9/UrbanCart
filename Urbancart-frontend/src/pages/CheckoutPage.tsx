@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CreditCard } from "lucide-react";
 import { ordersAPI } from "../api";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
@@ -21,6 +22,7 @@ export default function CheckoutPage() {
   });
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -41,15 +43,38 @@ export default function CheckoutPage() {
     try {
       const { data } = await ordersAPI.place(fullAddress);
       clearCart();
-      navigate("/orders", { state: { newOrderId: data.id } });
+      setPaymentSuccess(true);
+      setTimeout(() => {
+        navigate("/orders", { state: { newOrderId: data.id } });
+      }, 2500);
     } catch {
       // Mock success for demo
       clearCart();
-      navigate("/orders", { state: { newOrderId: "UC" + Math.floor(100000 + Math.random() * 900000) } });
+      setPaymentSuccess(true);
+      setTimeout(() => {
+        navigate("/orders", { state: { newOrderId: "UC" + Math.floor(100000 + Math.random() * 900000) } });
+      }, 2500);
     } finally {
       setLoading(false);
     }
   };
+
+  if (paymentSuccess) {
+    return (
+      <div className="payment-success-overlay">
+        <div className="payment-success-modal">
+          <div className="success-icon-wrap">
+            <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+              <path className="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+          </div>
+          <h2>Payment Successful</h2>
+          <p>Processing your order...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="section">
@@ -102,8 +127,8 @@ export default function CheckoutPage() {
             <hr className="divider" />
 
             <h3 className="checkout-section-title">Payment</h3>
-            <div className="payment-note">
-              💳 &nbsp;Cash on Delivery (COD) — payment gateway out of scope for this project
+            <div className="payment-note" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <CreditCard size={18} /> Cash on Delivery (COD) — payment gateway out of scope for this project
             </div>
 
             {error && <p className="checkout-error">{error}</p>}

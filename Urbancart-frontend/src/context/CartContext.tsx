@@ -27,9 +27,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     fetch("http://localhost:8000/api/cart/", {
       headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
     })
-      .then((r) => r.json())
-      .then((data) => setItems(data))
-      .catch(() => {});
+      .then(async (r) => {
+        if (!r.ok) throw new Error("Failed to fetch cart");
+        return r.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) setItems(data);
+        else setItems([]);
+      })
+      .catch(() => setItems([]));
   }, [user]);
 
   const addItem = (product: Product, quantity = 1) => {
@@ -56,8 +62,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => setItems([]);
 
-  const count = items.reduce((s, i) => s + i.quantity, 0);
-  const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
+  const safeItems = Array.isArray(items) ? items : [];
+  const count = safeItems.reduce((s, i) => s + i.quantity, 0);
+  const total = safeItems.reduce((s, i) => s + i.product.price * i.quantity, 0);
 
   return (
     <CartContext.Provider value={{ items, count, total, addItem, removeItem, updateQty, clearCart }}>

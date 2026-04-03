@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../hooks/useToast";
@@ -19,9 +20,13 @@ function ProductCard({ product }: Props) {
   const { addItem } = useCart();
   const { show } = useToast();
 
+  const [added, setAdded] = useState(false);
+
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
     addItem(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
     show(`${product.name} added to bag`);
   };
 
@@ -53,9 +58,9 @@ function ProductCard({ product }: Props) {
         <button
           className="btn btn-primary btn-full btn-sm"
           onClick={handleAdd}
-          disabled={product.stock === 0}
+          disabled={product.stock === 0 || added}
         >
-          {product.stock === 0 ? "Out of Stock" : "Add to Bag"}
+          {product.stock === 0 ? "Out of Stock" : added ? "Added to Bag ✓" : "Add to Bag"}
         </button>
       </div>
     </div>

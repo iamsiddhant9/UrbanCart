@@ -1,4 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import CartItemComponent from "../components/CartItem";
@@ -18,7 +19,7 @@ export default function CartPage() {
       <div className="section">
         <div className="container">
           <div className="empty-state">
-            <div className="empty-icon">🛍</div>
+            <div className="empty-icon" style={{ display: "flex", justifyContent: "center" }}><ShoppingBag size={56} strokeWidth={1.5} /></div>
             <h2 className="empty-title">Your bag is empty</h2>
             <p className="empty-sub">Add some items to get started</p>
             <button className="btn btn-primary" onClick={() => navigate("/products")}>
@@ -86,7 +87,7 @@ export default function CartPage() {
                   Proceed to Checkout
                 </button>
               ) : (
-                <Link to="/login" className="btn btn-accent btn-full" style={{ display: "flex" }}>
+                <Link to="/login" state={{ from: "/checkout" }} className="btn btn-accent btn-full" style={{ display: "flex", justifyContent: "center" }}>
                   Sign in to Checkout
                 </Link>
               )}

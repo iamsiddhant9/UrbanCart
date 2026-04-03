@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Package, MapPin, ChevronDown, ChevronUp } from "lucide-react";
 import { ordersAPI } from "../api";
 import "./OrdersPage.css";
 
@@ -52,7 +53,7 @@ export default function OrdersPage() {
     return (
       <div className="section container">
         <div className="empty-state">
-          <div className="empty-icon">📦</div>
+          <div className="empty-icon" style={{ display: "flex", justifyContent: "center" }}><Package size={48} strokeWidth={1.5} /></div>
           <h2 className="empty-title">No orders yet</h2>
           <p className="empty-sub">Your order history will appear here</p>
           <button className="btn btn-primary" onClick={() => navigate("/products")}>Start Shopping</button>
@@ -82,7 +83,9 @@ export default function OrdersPage() {
                   {order.total_amount > 0 && (
                     <p className="order-total">₹{order.total_amount.toLocaleString()}</p>
                   )}
-                  <span className="expand-icon">{expanded === order.id ? "▲" : "▼"}</span>
+                  <span className="expand-icon" style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}>
+                    {expanded === order.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  </span>
                 </div>
               </div>
 
@@ -99,7 +102,10 @@ export default function OrdersPage() {
                     </div>
                   )}
                   {order.address && order.address !== "—" && (
-                    <p className="order-address">📍 {order.address}</p>
+                    <p className="order-address" style={{ display: "flex", alignItems: "flex-start", gap: "6px" }}>
+                      <MapPin size={16} style={{ flexShrink: 0, marginTop: "2px", color: "var(--mid)" }} />
+                      <span>{order.address}</span>
+                    </p>
                   )}
                 </div>
               )}

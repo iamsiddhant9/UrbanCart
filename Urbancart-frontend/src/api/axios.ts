@@ -18,6 +18,9 @@ api.interceptors.response.use(
   async (err) => {
     const original = err.config;
     if (err.response?.status === 401 && !original._retry) {
+      if (localStorage.getItem("access_token") === "mock-token") {
+        return Promise.reject(err);
+      }
       original._retry = true;
       try {
         const refresh = localStorage.getItem("refresh_token");
@@ -29,9 +32,8 @@ api.interceptors.response.use(
         original.headers.Authorization = `Bearer ${data.access}`;
         return api(original);
       } catch {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        window.location.href = "/login";
+        // Fallback: If refresh fails, do not forcefully wipe session in demo mode.
+        // Let the specific component's .catch() block handle graceful mock fallbacks.
       }
     }
     return Promise.reject(err);

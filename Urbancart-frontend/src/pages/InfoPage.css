@@ -1,0 +1,31 @@
+.info-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.info-title {
+  font-size: 2.25rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+
+.info-body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--fg);
+}
+
+.info-body p {
+  margin-bottom: 1.5rem;
+}
+
+.info-body ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-body li {
+  margin-bottom: 0.5rem;
+}

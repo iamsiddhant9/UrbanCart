@@ -26,8 +26,8 @@ interface Category {
 }
 
 const MOCK_PRODUCTS: Product[] = [
-  { id: 1, category_id: 1, name: "Linen Throw Pillow",    brand: "Maison",    price: 1299, old_price: 1799, badge: "Sale", stock: 12, image_url: null, description: "Handwoven linen pillow with a natural texture." },
-  { id: 2, category_id: 1, name: "Ceramic Pour-Over Set", brand: "Kiln & Co", price: 2499, old_price: null, badge: "New",  stock: 8,  image_url: null, description: "Handcrafted ceramic pour-over set." },
+  { id: 1, category_id: 1, name: "Linen Throw Pillow",    brand: "Maison",    price: 1299, old_price: 1799, badge: "Sale", stock: 12, image_url: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=800&auto=format&fit=crop", description: "Handwoven linen pillow with a natural texture." },
+  { id: 2, category_id: 1, name: "Ceramic Pour-Over Set", brand: "Kiln & Co", price: 2499, old_price: null, badge: "New",  stock: 8,  image_url: "/UrbanCart/images/ceramic_pourover.png", description: "Handcrafted ceramic pour-over set." },
   { id: 3, category_id: 2, name: "Oversized Wool Blazer", brand: "Atelier",   price: 5999, old_price: 8499, badge: "Sale", stock: 5,  image_url: null, description: "Timeless oversized blazer in premium Italian wool." },
   { id: 4, category_id: 4, name: "Cold Pressed Face Oil", brand: "Sève",      price: 1599, old_price: null, badge: null,   stock: 20, image_url: null, description: "Rosehip, sea buckthorn and jojoba blend." },
 ];

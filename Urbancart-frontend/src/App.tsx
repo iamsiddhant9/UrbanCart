@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 
@@ -16,10 +16,13 @@ import OrdersPage from "./pages/OrdersPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AdminPage from "./pages/AdminPage";
+import InfoPage from "./pages/InfoPage";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
-  return user ? <>{children}</> : <Navigate to="/login" replace />;
+  const { user, authReady } = useAuth();
+  const location = useLocation();
+  if (!authReady) return null; // wait until localStorage is read
+  return user ? <>{children}</> : <Navigate to="/login" state={{ from: location.pathname }} replace />;
 }
 
 function AdminRoute({ children }: { children: React.ReactNode }) {
@@ -42,6 +45,7 @@ function AppShell() {
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/login"        element={<LoginPage />} />
           <Route path="/register"     element={<RegisterPage />} />
+          <Route path="/i/:page"      element={<InfoPage />} />
 
           {/* Auth required */}
           <Route path="/cart" element={
@@ -70,12 +74,12 @@ function AppShell() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <CartProvider>
           <AppShell />
         </CartProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

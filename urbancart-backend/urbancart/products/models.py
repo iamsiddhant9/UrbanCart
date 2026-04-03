@@ -2,8 +2,9 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=80)
-    slug = models.SlugField(unique=True)
+    name  = models.CharField(max_length=80)
+    slug  = models.SlugField(unique=True)
+    emoji = models.CharField(max_length=10, blank=True, default='')
 
     def __str__(self):
         return self.name

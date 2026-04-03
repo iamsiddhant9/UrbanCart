@@ -1,4 +1,5 @@
 import type { Category } from "../types";
+import { Home, Shirt, Armchair, Sparkles, ShoppingBag } from "lucide-react";
 import "./FilterSidebar.css";
 
 export type SortOption = "price_asc" | "price_desc" | "newest";
@@ -38,12 +39,23 @@ function FilterSidebar({
           <input type="radio" name="category" checked={!activeCategory} onChange={() => onCategoryChange(null)} />
           All Categories
         </label>
-        {categories.map((c) => (
-          <label key={c.id} className={`filter-item ${activeCategory === c.id ? "active" : ""}`}>
-            <input type="radio" name="category" checked={activeCategory === c.id} onChange={() => onCategoryChange(c.id)} />
-            {c.emoji} {c.name}
-          </label>
-        ))}
+        {categories.map((c) => {
+          const getIcon = (slug: string) => {
+            switch (slug) {
+              case "living-home": return <Home size={14} />;
+              case "fashion": return <Shirt size={14} />;
+              case "furniture": return <Armchair size={14} />;
+              case "beauty": return <Sparkles size={14} />;
+              default: return <ShoppingBag size={14} />;
+            }
+          };
+          return (
+            <label key={c.id} className={`filter-item ${activeCategory === c.id ? "active" : ""}`} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <input type="radio" name="category" checked={activeCategory === c.id} onChange={() => onCategoryChange(c.id)} />
+              {getIcon(c.slug)} <span style={{ marginTop: "1px" }}>{c.name}</span>
+            </label>
+          );
+        })}
       </div>
       <hr className="filter-divider" />
       <div className="filter-section">
